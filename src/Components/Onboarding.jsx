@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const App = () => {
+const Onboarding = () => {
   const [selected, setSelected] = useState("");
 
   return (
@@ -61,4 +61,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Onboarding;
