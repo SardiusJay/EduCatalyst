@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from '../assets/Educatalystimage.jpg';
 
 const Onboarding = () => {
   const [selected, setSelected] = useState("");
@@ -10,11 +11,7 @@ const Onboarding = () => {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-purple-700">EduCatalyst</h1>
           <div className="mt-4">
-            <img
-              src="/educatalyst-illustration.png"
-              alt="Illustration"
-              className="w-80"
-            />
+            <img src="../assets/Educatalystimage.jpg" alt="Illustration" className="w-80"/>
           </div>
         </div>
       </div>
