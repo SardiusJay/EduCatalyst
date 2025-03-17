@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import illustration from "../assets/Educatalystimage.jpg";
+import Home from "./Home";
 
 const Organization = () => {
   const navigate = useNavigate();
@@ -16,13 +18,8 @@ const Organization = () => {
       {/* Left Section */}
       <div className="w-1/2 bg-purple-50 flex justify-center items-center p-10">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-purple-700">EduCatalyst</h1>
           <div className="mt-4">
-            <img
-              src="/educatalyst-illustration.png"
-              alt="Illustration"
-              className="w-80"
-            />
+             <img src={illustration} alt="Illustration" className="w-80" />
           </div>
         </div>
       </div>
@@ -30,11 +27,10 @@ const Organization = () => {
       {/* Right Section */}
       <div className="w-1/2 flex flex-col justify-center px-16 py-10">
         {/* Back Button */}
-        <button onClick={() => navigate(-1)} className="text-purple-600 flex items-center gap-2 mb-6">
-          <FaArrowLeft className="text-sm" />
-          <span>Back</span>
+        <button onClick={() => navigate("/")} className="text-purple-600 flex items-center gap-2 mb-6">
+        <FaArrowLeft className="text-sm" />
+        <span>Back</span>
         </button>
-
         <h2 className="text-2xl font-semibold mb-2">Set Up Your Organization Profile</h2>
         <p className="text-gray-500 mb-6">Kindly fill in the following details</p>
 
@@ -100,8 +96,15 @@ const Organization = () => {
 
           {/* Login Link */}
           <p className="text-center text-gray-500 mt-2">
-            Already have an Account? <span className="text-purple-600 cursor-pointer">Login here</span>
-          </p>
+      Already have an Account? 
+      <span 
+        className="text-purple-600 cursor-pointer" 
+        onClick={() => navigate("/login")}
+      >
+        Login here
+      </span>
+    </p>
+
         </form>
       </div>
     </div>
