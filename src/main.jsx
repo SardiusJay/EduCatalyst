@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Organization from "./pages/Organization";
-import Sponsors from "./pages/Sponsors";
+import Home from "./Pages/Home";
+import Organization from "./Pages/Organization";
+import Sponsors from "./Pages/Sponsors";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

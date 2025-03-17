@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import Home from "./Home";
 
-const Organization = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [logo, setLogo] = useState(null);
 
@@ -31,10 +30,11 @@ const Organization = () => {
       {/* Right Section */}
       <div className="w-1/2 flex flex-col justify-center px-16 py-10">
         {/* Back Button */}
-        <button onClick={() => navigate("/")} className="text-purple-600 flex items-center gap-2 mb-6">
-        <FaArrowLeft className="text-sm" />
-        <span>Back to Home</span>
+        <button onClick={() => navigate(-1)} className="text-purple-600 flex items-center gap-2 mb-6">
+          <FaArrowLeft className="text-sm" />
+          <span>Back</span>
         </button>
+
         <h2 className="text-2xl font-semibold mb-2">Set Up Your Organization Profile</h2>
         <p className="text-gray-500 mb-6">Kindly fill in the following details</p>
 
@@ -108,4 +108,4 @@ const Organization = () => {
   );
 };
 
-export default Organization;
+export default Login;
