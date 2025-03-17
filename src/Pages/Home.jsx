@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import illustration from "../assets/Educatalystimage.jpg";
+
 
 const Home = () => {
   const [selected, setSelected] = useState("");
@@ -10,13 +12,10 @@ const Home = () => {
       {/* Left Section */}
       <div className="w-1/2 bg-purple-50 flex justify-center items-center p-10">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-purple-700">EduCatalyst</h1>
           <div className="mt-4">
-            <img
-              src="/educatalyst-illustration.png"
-              alt="Illustration"
-              className="w-80"
-            />
+          <div className="mt-4">
+        <img src={illustration} alt="Illustration" className="w-80" />
+        </div>
           </div>
         </div>
       </div>
