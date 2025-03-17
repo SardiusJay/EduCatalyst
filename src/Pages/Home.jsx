@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Image from '../assets/Educatalystimage.jpg';
+import { useNavigate } from "react-router-dom";
 
-const OrgProfile = () => {
+const Home = () => {
   const [selected, setSelected] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className="flex h-screen">
@@ -11,35 +12,39 @@ const OrgProfile = () => {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-purple-700">EduCatalyst</h1>
           <div className="mt-4">
-            <img src="../assets/Educatalystimage.jpg" alt="Illustration" className="w-80"/>
+            <img
+              src="/educatalyst-illustration.png"
+              alt="Illustration"
+              className="w-80"
+            />
           </div>
         </div>
       </div>
 
       {/* Right Section */}
       <div className="w-1/2 flex flex-col justify-center items-center">
-        <h2 className="text-2xl font-semibold">Set Up Your Organization Profile</h2>
-        <p className="text-gray-500 mt-2">Kindly fill in the following details </p>
+        <h2 className="text-2xl font-semibold">Let's get to know you</h2>
+        <p className="text-gray-500 mt-2">Which best describes you?</p>
 
         <div className="flex gap-4 mt-6">
           <button
             className={`p-4 border rounded-lg w-40 ${
-              selected === "Organization"
+              selected === "organization"
                 ? "border-purple-600 bg-purple-100"
                 : "border-gray-300"
             }`}
-            onClick={() => setSelected("Organization")}
+            onClick={() => setSelected("organization")}
           >
             Organization
           </button>
 
           <button
             className={`p-4 border rounded-lg w-40 ${
-              selected === "Sponsors"
+              selected === "sponsors"
                 ? "border-purple-600 bg-purple-100"
                 : "border-gray-300"
             }`}
-            onClick={() => setSelected("Sponsors")}
+            onClick={() => setSelected("sponsors")}
           >
             Sponsors
           </button>
@@ -50,6 +55,7 @@ const OrgProfile = () => {
             selected ? "bg-purple-600 hover:bg-purple-700" : "bg-gray-300"
           }`}
           disabled={!selected}
+          onClick={() => navigate(`/${selected}`)}
         >
           Proceed
         </button>
@@ -58,4 +64,4 @@ const OrgProfile = () => {
   );
 };
 
-export default OrgProfile;
+export default Home;

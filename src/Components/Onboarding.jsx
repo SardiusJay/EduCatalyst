@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Image from '../assets/Educatalystimage.jpg';
+import Educatalystimage from '../assets/Educatalystimage.jpg';
+
 
 const Onboarding = () => {
   const [selected, setSelected] = useState("");
