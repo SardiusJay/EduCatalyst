@@ -31,8 +31,8 @@ const WelcomeBack = () => {
           <span>Back</span>
         </button>
 
-        <h2 className="text-2xl font-semibold mb-2">Set Up Login Credentials </h2>
-        <p className="text-gray-500 mb-6">Kindly fill in the following details </p>
+        <h2 className="text-2xl font-semibold mb-2">Welcome Back </h2>
+        <p className="text-gray-500 mb-6">Kindly fill in the following details  </p>
 
         {/* Form */}
         <form className="space-y-4">
@@ -46,7 +46,7 @@ const WelcomeBack = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Craete Password</label>
+            <label className="block text-gray-700 font-medium">Password</label>
             <input
               type="Password"
               placeholder=""
@@ -54,15 +54,6 @@ const WelcomeBack = () => {
             />
           </div>
 
-          
-          <div>
-            <label className="block text-gray-700 font-medium">Confirm Password</label>
-            <input
-              type="Password"
-              placeholder=""
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
 
           {/* Proceed Button */}
           <button
@@ -71,6 +62,16 @@ const WelcomeBack = () => {
           >
             Register
           </button>
+
+          <p className="text-center text-gray-500 mt-2">
+          New here?
+      <span 
+        className="text-purple-600 cursor-pointer" 
+        onClick={() => navigate("/Organization")}
+      >
+        Sign Up Now
+      </span>
+    </p>
         </form>
       </div>
     </div>
