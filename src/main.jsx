@@ -6,6 +6,9 @@ import Organization from "./Pages/Organization";
 import Sponsors from "./Pages/Sponsors";
 import Login from "./Pages/Login";
 import WelcomeBack from "./Pages/WelcomeBack";
+import ForgetPassword from "./Components/ForgetPassword";
+import ForgetPassword2 from "./Components/ForgetPassword2";
+import ForgetPassword3 from "./Components/ForgetPassword3";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -17,6 +20,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/sponsors" element={<Sponsors />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/WelcomeBack" element={<WelcomeBack />} />
+        <Route path="/ForgetPassword" element={<ForgetPassword />} />
+        <Route path="/ForgetPassword2" element={<ForgetPassword2 />} />
+        <Route path="/ForgetPassword3" element={<ForgetPassword3 />} />
+        
 
       </Routes>
     </Router>

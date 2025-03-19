@@ -36,7 +36,7 @@ const ResetPassword1 = () => {
             
           <button
             type="submit"
-            className="w-full bg-purple-800 text-white py-3 rounded-md hover:bg-purple-900 transition duration-200 mb-4"
+            className="w-full bg-purple-800 text-white py-3 rounded-md hover:bg-purple-900 transition duration-200 mb-4" onClick={() => navigate("/ForgetPassword2")}
           >
             Send OTP
           </button>

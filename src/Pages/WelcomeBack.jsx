@@ -54,6 +54,15 @@ const WelcomeBack = () => {
             />
           </div>
 
+          <p className="text-right text-gray-500 mt-2">
+      <span 
+        className="text-purple-600 cursor-pointer" 
+        onClick={() => navigate("/ForgetPassword3")}
+      >
+        Forgot Password?
+      </span>
+    </p>
+
 
           {/* Proceed Button */}
           <button
