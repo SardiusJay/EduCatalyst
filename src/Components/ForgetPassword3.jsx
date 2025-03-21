@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword1 = () => {
+   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -36,7 +38,7 @@ const ResetPassword1 = () => {
             
           <button
             type="submit"
-            className="w-full bg-purple-800 text-white py-3 rounded-md hover:bg-purple-900 transition duration-200 mb-4" onClick={() => navigate("/ForgetPassword2")}
+            className="w-full bg-purple-800 text-white py-3 rounded-md hover:bg-purple-900 transition duration-200 mb-4" onClick={() => navigate("/ForgetPassword2.jsx")}
           >
             Send OTP
           </button>
