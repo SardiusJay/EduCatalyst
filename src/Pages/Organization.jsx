@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import illustration from "../assets/Educatalystimage.jpg";
-import Home from "./Home";
+import Home from "./Home1";
 
 const Organization = () => {
   const navigate = useNavigate();
