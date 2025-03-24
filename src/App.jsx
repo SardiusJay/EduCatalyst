@@ -1,6 +1,8 @@
 import Onboarding from "./Components/Onboarding";
-import { Test } from './Components/Test';
 import OrgProfile from './Components/OrgProfile';
+import Overview from "./Components/Overview";
+
+
 
 
 
@@ -10,6 +12,7 @@ function App() {
    <div>
    <Onboarding />
    <OrgProfile />
+   <Overview />
    
   
 
