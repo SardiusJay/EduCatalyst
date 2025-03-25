@@ -10,6 +10,9 @@ import ForgetPassword from "./Components/ForgetPassword";
 import ForgetPassword2 from "./Components/ForgetPassword2";
 import ForgetPassword3 from "./Components/ForgetPassword3";
 import Overview from "./Components/Overview";
+import Wallet from "./Components/Wallet";
+import Settings from "./Components/Settings";
+import Settings2 from "./Components/Settings2";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -25,6 +28,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/ForgetPassword2" element={<ForgetPassword2 />} />
         <Route path="/ForgetPassword3" element={<ForgetPassword3 />} />
         <Route path="/Overview" element={<Overview />} />
+        <Route path="/Wallet" element={<Wallet />} />
+        <Route path="/Setting" element={<Settings />} />
+        <Route path="/Setting2" element={<Settings2 />} />
+
+
         
 
       </Routes>
