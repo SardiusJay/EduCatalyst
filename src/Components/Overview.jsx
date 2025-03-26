@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Link } from 'react-router-dom';
+
 
 const EnhancedDashboard = () => {
   // Sample data for the chart
@@ -55,19 +57,19 @@ const EnhancedDashboard = () => {
         <div className="py-4">
           <div className="bg-purple-600 text-white px-4 py-3 flex items-center">
             <span className="mr-3">📊</span>
-            <span>Overview</span>
+            <Link to="/Overview" className="text-black">Overview</Link>
           </div>
           <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
             <span className="mr-3">📝</span>
-            <span>Request</span>
+            <Link to="/Setting2" className="text-black">Request</Link>
           </div>
           <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
             <span className="mr-3">💼</span>
-            <span>Wallet</span>
+            <Link to="/Wallet" className="text-black">Wallet</Link>
           </div>
           <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
             <span className="mr-3">⚙️</span>
-            <span>Settings</span>
+            <Link to="/Setting" className="text-black">Settings</Link>
           </div>
         </div>
       </div>
