@@ -10,8 +10,8 @@ const Layout = ({ children }) => {
   const navItems = [
     { name: "Overview", path: "/Overview", icon: "📊" },
     { name: "Request", path: "/request", icon: "📝" },
-    { name: "Wallet", path: "/wallet", icon: "💼" },
-    { name: "Settings", path: "/settings", icon: "⚙️" },
+    { name: "Wallet", path: "/Wallet", icon: "💼" },
+    { name: "Settings", path: "/Setting", icon: "⚙️" }, 
   ];
 
   // Helper function to check if a path is active

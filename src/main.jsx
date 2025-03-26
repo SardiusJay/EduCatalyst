@@ -11,8 +11,9 @@ import ForgetPassword from "./Components/ForgetPassword";
 import ForgetPassword2 from "./Components/ForgetPassword2";
 import ForgetPassword3 from "./Components/ForgetPassword3";
 import Overview from "./Components/Overview";
-import HomePage from "./Pages/HomePage";
-import Footer from "./Pages/Footer";
+import Wallet from "./Components/Wallet";
+import Settings from "./Components/Settings";
+import Settings2 from "./Components/Settings2";
 import "./index.css";
 import "./Components/Onboarding";
 import Onboarding from "./Components/Onboarding";
@@ -20,6 +21,8 @@ import FAQSection from "./Pages/Faq";
 import ContactSection from "./Pages/Contact";
 import Request from "./Pages/Request";
 import RequestDetailPage from "./Pages/RequestDetailPage";
+import HomePage from "./Pages/HomePage";
+import Footer from "./Pages/Footer";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -38,11 +41,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/ForgetPassword" element={<ForgetPassword />} />
         <Route path="/ForgetPassword2" element={<ForgetPassword2 />} />
         <Route path="/ForgetPassword3" element={<ForgetPassword3 />} />
-        <Route path="/Overview" element={<Overview />} />
         <Route path="/faq" element={<FAQSection />} />
-        <Route path="/contact" element={<ContactSection />} />
+        <Route path="contact" element={<ContactSection />} />
         <Route path="/request" element={<Request />} />
-        <Route path="/requests/:id" element={<RequestDetailPage />} />
+       <Route path="/RequestDetailPage" element={<RequestDetailPage />} />
+        <Route path="/Overview" element={<Overview />} />
+        <Route path="/Wallet" element={<Wallet />} />
+        <Route path="/Setting" element={<Settings />} />
+        <Route path="/Setting2" element={<Settings2 />} />
+
+
         
 
       </Routes>
