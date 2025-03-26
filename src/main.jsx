@@ -18,6 +18,8 @@ import "./Components/Onboarding";
 import Onboarding from "./Components/Onboarding";
 import FAQSection from "./Pages/Faq";
 import ContactSection from "./Pages/Contact";
+import Request from "./Pages/Request";
+import RequestDetailPage from "./Pages/RequestDetailPage";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -39,6 +41,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Overview" element={<Overview />} />
         <Route path="/faq" element={<FAQSection />} />
         <Route path="/contact" element={<ContactSection />} />
+        <Route path="/request" element={<Request />} />
+        <Route path="/requests/:id" element={<RequestDetailPage />} />
         
 
       </Routes>

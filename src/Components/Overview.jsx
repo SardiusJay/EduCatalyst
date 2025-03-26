@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
+import Layout from "../Components/Layout";
 const EnhancedDashboard = () => {
   // Sample data for the chart
   const chartData = [
@@ -41,58 +41,41 @@ const EnhancedDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
+    <Layout>
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar - hidden on mobile unless toggled */}
-      <div className={`${isSidebarOpen ? 'block' : 'hidden'} md:block md:w-64 bg-white border-r fixed md:relative z-10 h-full`}>
-        <div className="p-4 border-b">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
-              E
-            </div>
-            <span className="ml-2 font-semibold text-gray-800">EduCatalyst</span>
-          </div>
-        </div>
-        <div className="py-4">
-          <div className="bg-purple-600 text-white px-4 py-3 flex items-center">
-            <span className="mr-3">📊</span>
-            <span>Overview</span>
-          </div>
-          <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
-            <span className="mr-3">📝</span>
-            <span>Request</span>
-          </div>
-          <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
-            <span className="mr-3">💼</span>
-            <span>Wallet</span>
-          </div>
-          <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
-            <span className="mr-3">⚙️</span>
-            <span>Settings</span>
-          </div>
-        </div>
-      </div>
+       {/* Sidebar - hidden on mobile unless toggled */}
+    {/* //   <div className={`${isSidebarOpen ? 'block' : 'hidden'} md:block md:w-64 bg-white border-r fixed md:relative z-10 h-full`}>
+    //     <div className="p-4 border-b">
+    //       <div className="flex items-center">
+    //         <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
+    //           E
+    //         </div>
+    //         <span className="ml-2 font-semibold text-gray-800">EduCatalyst</span>
+    //       </div>
+    //     </div>
+    //     <div className="py-4">
+    //       <div className="bg-purple-600 text-white px-4 py-3 flex items-center">
+    //         <span className="mr-3">📊</span>
+    //         <span>Overview</span>
+    //       </div>
+    //       <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
+    //         <span className="mr-3">📝</span>
+    //         <span>Request</span>
+    //       </div>
+    //       <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
+    //         <span className="mr-3">💼</span>
+    //         <span>Wallet</span>
+    //       </div>
+    //       <div className="px-4 py-3 hover:bg-gray-100 flex items-center">
+    //         <span className="mr-3">⚙️</span>
+    //         <span>Settings</span>
+    //       </div>
+    //     </div>
+    //   </div> */}
       
       {/* Main content */}
       <div className="flex-1 overflow-auto">
-        {/* Top Navigation */}
-        <div className="bg-white border-b px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center">
-            <button 
-              className="md:hidden mr-2"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-          <div className="flex items-center space-x-4">
-            
-            <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
-              S
-            </div>
-          </div>
-        </div>
+        
 
         <div className="p-4 md:p-6">
           <h1 className="text-2xl font-semibold mb-6">Dashboard</h1>
@@ -194,6 +177,7 @@ const EnhancedDashboard = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
