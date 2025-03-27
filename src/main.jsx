@@ -23,6 +23,7 @@ import Request from "./Pages/Request";
 import RequestDetailPage from "./Pages/RequestDetailPage";
 import HomePage from "./Pages/HomePage";
 import Footer from "./Pages/Footer";
+import SponsorSignup from "./Pages/SponsorSignup";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -49,6 +50,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Wallet" element={<Wallet />} />
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
+        <Route path="/SponosorSignup" element={<SponsorSignup />} />
 
 
         

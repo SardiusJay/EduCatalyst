@@ -31,7 +31,7 @@ const SponsorSignup = () => {
           <span>Back</span>
         </button>
 
-        <h2 className="text-2xl font-semibold mb-2">Welcome Back </h2>
+        <h2 className="text-2xl font-semibold mb-2">Sign up as a Sponsor </h2>
         <p className="text-gray-500 mb-6">Kindly fill in the following details  </p>
 
         {/* Form */}
