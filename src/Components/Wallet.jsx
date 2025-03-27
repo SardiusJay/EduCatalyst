@@ -3,6 +3,7 @@ import { Wallet, Settings, Grid, Eye } from 'lucide-react';
 import { DotsThreeVertical 
 } from 'phosphor-react';
 import { Link } from 'react-router-dom';
+import Layout from "../Components/Layout";
 
 
 const WalletDashboard = () => {
@@ -41,38 +42,10 @@ const WalletDashboard = () => {
   ];
 
   return (
+    <Layout>
     <div className="flex bg-gray-100 min-h-screen">
-      {/* Sidebar */}
-      <div className="w-64 bg-white p-4 border-r">
-        <div className="flex items-center mb-8">
-          <img src="/api/placeholder/40/40" alt="EduCatalyst" className="w-10 h-10 mr-2" />
-          <span className="font-bold text-lg">EduCatalyst</span>
-        </div>
-        <nav>
-          <ul className="space-y-2">
-            <li className="flex items-center p-2 hover:bg-purple-50 rounded">
-              <Grid className="mr-2 text-black" size={15} />
-              <Link to="/Overview" className="text-black">Overview</Link>
-            </li>
-            <li className="flex items-center p-2 hover:bg-purple-50 rounded">
-              <Grid className="mr-2 text-black" size={15} />
-              <Link to="/Setting2" className="text-black">Request</Link>
-            </li>
-            <li className="flex items-center p-2 bg-purple-700 rounded-lg text-white">
-              <Wallet className="mr-2 text-white" size={15} />
-              <Link to="/Wallet" className="text-white">Wallet</Link>
-            </li>
-            <li className="flex items-center p-2 hover:bg-purple-50 rounded">
-              <Settings className="mr-2 text-black" size={15} />
-              <Link to="/Setting" className="text-black">Settings</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      {/* Main Content */}
       <div className="flex-1 p-8">
-        <h1 className="text-2xl  bg-purple-800text-font-bold mt-10">Wallet</h1>
+        <h1 className="text-2xl  text-purple-800 text-font-bold ">Wallet</h1>
         
         {/* Connect Wallet Section */}
         <div className="mb-6 flex justify-between items-center">
@@ -164,6 +137,7 @@ const WalletDashboard = () => {
         
       </div>
     </div>
+    </Layout>
   );
 };
 
