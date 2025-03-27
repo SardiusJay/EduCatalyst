@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios"; 
 import illustration from "../assets/Educatalystimage.jpg";
+import Home from "./Home1";
 
 const Organization = () => {
   const navigate = useNavigate();
