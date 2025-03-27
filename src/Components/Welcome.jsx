@@ -1,19 +1,43 @@
 import React, { useState } from "react";
 import Educatalyst from '../assets/EduCatalyst.svg';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const WelcomeBack = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt with:", email);
+    console.log("handleSubmit triggered with", { email, password });
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000//api/auth/login/', {
+        email,
+        password
+      });
+      console.log("Response received:", response.data);
+
+      localStorage.setItem('token', response.data.token);
+      navigate('/Overview');
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.response?.data?.message || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
-  
+
   return (
     <div className="flex h-screen">
+      {/* Left Section */}
       <div className="w-1/2 bg-purple-50 flex justify-center items-center p-10">
         <div className="text-center">
           <div className="mb-10">
@@ -32,6 +56,13 @@ const WelcomeBack = () => {
           <h2 className="text-3xl font-bold mb-2">Welcome Back</h2>
           <p className="text-gray-500 mb-8">Kindly fill in the following details</p>
           
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {error}
+            </div>
+          )}
+          
+          {/* The form uses onSubmit */}
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -43,6 +74,7 @@ const WelcomeBack = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="edutechglobal@gmail.com"
+                required
               />
             </div>
             
@@ -56,6 +88,7 @@ const WelcomeBack = () => {
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <button
                   type="button"
@@ -84,9 +117,11 @@ const WelcomeBack = () => {
             
             <button
               type="submit"
-              className="w-full py-4 bg-purple-800 border border-black-400 text-white font-bold rounded-lg text-lg hover:bg-purple-00"
+              onClick={handleSubmit}
+              className="w-full py-4 bg-purple-800 border border-black-400 text-white font-bold rounded-lg text-lg hover:bg-purple-900 disabled:opacity-50"
+              disabled={loading}
             >
-              Register
+              {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
           
