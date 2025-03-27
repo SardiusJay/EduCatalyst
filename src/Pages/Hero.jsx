@@ -5,17 +5,20 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
     const navigate = useNavigate();
   return (
-    <div className="bg-[#F6F2F8] w-full">
+    <div className="bg-[#E1C0F4] w-full">
       {/* Header Section */}
-      <section className="w-full bg-white py-16">
-        <div className="max-w-7xl mx-auto text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-purple-800 mb-4">
+      <section className="w-full bg-[#E1C0F4] py-16" style={{ background: "url('grid-pattern.png') center/cover, #F6F2F8" }}>
+        <div className="max-w-7xl mt-5 mx-auto text-center px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#8453a0] mb-4">
             Decentralized Funding for Education
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8">
+          <p className="text-lg md:text-3xl text-gray-700 mb-8 max-w-2xl mx-auto">
             Connect with sponsors and fund your educational initiatives
           </p>
-          <button onClick={() => navigate("/onboarding")}className="bg-purple-800 text-white py-3 px-6 rounded-lg hover:bg-purple-600">
+          <button 
+            onClick={() => navigate("/onboarding")}
+            className="bg-[#8E4EC6] text-white py-3 px-8 rounded-full hover:bg-[#7D3EB3] transition-colors duration-300"
+          >
             Get Started 
           </button>
         </div>
