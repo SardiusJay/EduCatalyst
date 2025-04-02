@@ -23,10 +23,41 @@ import Request from "./Pages/Request";
 import RequestDetailPage from "./Pages/RequestDetailPage";
 import HomePage from "./Pages/HomePage";
 import Footer from "./Pages/Footer";
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
+
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, 
+});
+
+const queryClient = new QueryClient();
+import SponsorSignup from "./Pages/SponsorSignup";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
     <Router>
       <Navbar />
       <Routes>
@@ -49,6 +80,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Wallet" element={<Wallet />} />
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
+        <Route path="/SponosorSignup" element={<SponsorSignup />} />
 
 
         
@@ -56,5 +88,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </Routes>
       <Footer />
     </Router>
+    </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   </React.StrictMode>
 );
