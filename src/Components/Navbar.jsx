@@ -32,8 +32,8 @@ const Navbar = () => {
     <header className="w-full bg-[#F6F2F8] shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         
-        <div className="flex items-center gap-2">
-          <img src={vector} alt="EduCatalyst Logo" className="h-8 w-auto" />
+        <div className="flex items-center gap-2" onClick={() => Navigate("/")}>
+          <img src={vector} alt="EduCatalyst Logo"  className="h-8 w-auto"  />
           {/* <span className="text-xl font-semibold text-purple-800">EduCatalyst</span> */}
         </div>
 

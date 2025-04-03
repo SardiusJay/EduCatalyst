@@ -50,6 +50,7 @@ const config = getDefaultConfig({
 });
 
 const queryClient = new QueryClient();
+import SponsorSignup from "./Pages/SponsorSignup";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -79,6 +80,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Wallet" element={<Wallet />} />
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
+        <Route path="/SponosorSignup" element={<SponsorSignup />} />
 
 
         
