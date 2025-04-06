@@ -1,147 +1,110 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useAccount, useContract, useProvider, useSigner } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import illustration from "../assets/Educatalystimage.jpg";
-import { create } from 'ipfs-http-client';
 import OrganizationABI from "../utils/abi.json";
-const CONTRACT_ADDRESS = "0x123..."; 
 
-
-const projectId = 'INFURA_PROJECT_ID';
-const projectSecret = 'INFURA_PROJECT_SECRET';
-const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-
-const ipfs = create({
-  host: 'ipfs.infura.io',
-  port: 5001,
-  protocol: 'https',
-  headers: {
-    authorization: auth
-  }
-});
+const CONTRACT_ADDRESS = "0xB4f57B3993a1B5124Fe912314B41e54BCBd91Cf2"; 
 
 const Organization = () => {
-  const navigate = useNavigate();
-  const [logo, setLogo] = useState(null);
-  const [logoHash, setLogoHash] = useState("");
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    websiteLink: '',
-    description: ''
-  });
-  const [error, setError] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const navigate = useNavigate();
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   websiteLink: '',
+  //   description: ''
+  // });
+  // const [error, setError] = useState(null);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const { address, isConnected } = useAccount();
-  const provider = useProvider();
-  const { data: signer } = useSigner();
+  // const { address, isConnected } = useAccount();
+  // const provider = useProvider();
+  // const { data: signer } = useSigner();
   
-  const contract = useContract({
-    address: CONTRACT_ADDRESS,
-    abi: OrganizationABI.abi,
-    signerOrProvider: signer || provider,
-  });
+  // const contract = useContract({
+  //   address: CONTRACT_ADDRESS,
+  //   abi: OrganizationABI.abi,
+  //   signerOrProvider: signer || provider,
+  // });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [name]: value
+  //   }));
+  // };
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files?.[0] || null;
-    setLogo(file);
+  // const saveOrgDataLocally = (orgAddress, data) => {
+  //   try {
+  //     const orgs = JSON.parse(localStorage.getItem('organizations') || '{}');
+  //     orgs[orgAddress] = data;
+  //     localStorage.setItem('organizations', JSON.stringify(orgs));
+  //   } catch (error) {
+  //     console.error("Error saving to localStorage:", error);
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
     
-    if (file) {
-      try {
-        const reader = new FileReader();
-        reader.readAsArrayBuffer(file);
-        reader.onloadend = () => {
-          setLogoHash("File ready for upload");
-        };
-      } catch (err) {
-        console.error("Error preparing file:", err);
-        setError("Failed to prepare logo. Please try again.");
-      }
-    }
-  };
-
-  const uploadToIPFS = async (file) => {
-    try {
-      const buffer = await file.arrayBuffer();
-      const added = await ipfs.add(buffer);
-      return added.path; 
-    } catch (error) {
-      console.error("Error uploading to IPFS: ", error);
-      throw new Error("Failed to upload to IPFS");
-    }
-  };
-
-  const saveOrgDataLocally = (orgAddress, data) => {
-    const orgs = JSON.parse(localStorage.getItem('organizations') || '{}');
-    orgs[orgAddress] = data;
-    localStorage.setItem('organizations', JSON.stringify(orgs));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  //   if (!isConnected) {
+  //     setError("Please connect your wallet first");
+  //     return;
+  //   }
     
-    if (!isConnected) {
-      setError("Please connect your wallet first");
-      return;
-    }
+  //   setError(null);
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     // Check if contract is available
+  //     if (!contract) {
+  //       throw new Error("Smart contract not initialized. Please refresh and try again.");
+  //     }
     
-    setError(null);
-    setIsSubmitting(true);
-
-    try {
-    
-      let ipfsHash = "";
-      if (logo) {
-        ipfsHash = await uploadToIPFS(logo);
-        console.log("Logo uploaded to IPFS with hash:", ipfsHash);
-      }
-
-
-      const tx = await contract.registerOrganization(
-        formData.name,
-        formData.description,
-        formData.websiteLink,
-        formData.email 
-      );
+  //     // Call the contract method with proper error handling
+  //     const tx = await contract.registerOrganization(
+  //       formData.name,
+  //       formData.description,
+  //       formData.websiteLink,
+  //       formData.email 
+  //     );
       
-     
-      await tx.wait();
+  //     // Wait for transaction to complete
+  //     await tx.wait();
       
-     
-      if (ipfsHash && address) {
+  //     // Save data locally if everything worked
+  //     if (address) {
+  //       saveOrgDataLocally(address, {
+  //         ...formData,
+  //         walletAddress: address
+  //       });
         
-        saveOrgDataLocally(address, {
-          ...formData,
-          logoIpfsHash: ipfsHash,
-          walletAddress: address
-        });
-        
-        console.log('Organization data with logo hash saved locally');
-      }
+  //       console.log('Organization data saved locally');
+  //     }
       
-      console.log('Organization profile created on blockchain');
-      navigate('/Overview');
-    } catch (err) {
-      setError(
-        err.data?.message || err.message || 
-        'Failed to submit organization profile to blockchain. Please try again.'
-      );
-      console.error('Blockchain submission error:', err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     console.log('Organization profile created on blockchain');
+  //     navigate('/Overview');
+  //   } catch (err) {
+  //     // Enhanced error handling
+  //     let errorMessage = 'Failed to submit organization profile. Please try again.';
+      
+  //     if (err.code === 'ACTION_REJECTED') {
+  //       errorMessage = 'Transaction was rejected. Please confirm the transaction in your wallet.';
+  //     } else if (err.data?.message) {
+  //       errorMessage = err.data.message;
+  //     } else if (err.message) {
+  //       errorMessage = err.message;
+  //     }
+      
+  //     setError(errorMessage);
+  //     console.error('Submission error:', err);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <div className="flex h-screen">
@@ -277,28 +240,6 @@ const Organization = () => {
               placeholder="www.edutechglobal.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 font-medium">Organization Logo</label>
-            <div className="flex items-center gap-4">
-              <div className="border border-gray-300 w-full p-3 rounded-lg text-gray-500 bg-gray-100">
-                {logo ? logo.name : "Upload your Logo"}
-              </div>
-              <label className="px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg cursor-pointer">
-                Upload
-                <input 
-                  type="file" 
-                  className="hidden" 
-                  onChange={handleFileChange}
-                  accept=".png,.jpg,.jpeg"
-                />
-              </label>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">PNG format - Max. 5MB</p>
-            {logoHash && (
-              <p className="text-sm text-green-600 mt-1">Logo ready for upload to IPFS</p>
-            )}
           </div>
 
           <div>
