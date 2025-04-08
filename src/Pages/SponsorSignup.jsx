@@ -37,6 +37,12 @@ const SponsorSignup = () => {
         {/* Form */}
         <form className="space-y-4">
           <div>
+            <label className="block text-gray-700 font-medium">Full Name</label>
+            <input
+              type="text"
+              placeholder="Abidoye john"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
             <label className="block text-gray-700 font-medium">Email Address</label>
             <input
               type="email"
@@ -54,15 +60,6 @@ const SponsorSignup = () => {
             />
           </div>
 
-          <p className="text-right text-gray-500 mt-2">
-      <span 
-        className="text-purple-600 cursor-pointer" 
-        onClick={() => navigate("/ForgetPassword3")}
-      >
-        Forgot Password?
-      </span>
-    </p>
-
 
           {/* Proceed Button */}
           <button
@@ -72,15 +69,6 @@ const SponsorSignup = () => {
             Register
           </button>
 
-          <p className="text-center text-gray-500 mt-2">
-          New here?
-      <span 
-        className="text-purple-600 cursor-pointer" 
-        onClick={() => navigate("/Organization")}
-      >
-        Sign Up Now
-      </span>
-    </p>
         </form>
       </div>
     </div>

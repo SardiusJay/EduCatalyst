@@ -12,6 +12,7 @@ import ForgetPassword from "./Components/ForgetPassword";
 import ForgetPassword2 from "./Components/ForgetPassword2";
 import ForgetPassword3 from "./Components/ForgetPassword3";
 import Overview from "./Components/Overview";
+import SponsorsLogin from "./Pages/SponsorsLogin"
 import Wallet from "./Components/Wallet";
 import Settings from "./Components/Settings";
 import Settings2 from "./Components/Settings2";
@@ -81,6 +82,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Wallet" element={<Wallet />} />
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
+        <Route path="/SponsorsLogin" element={<SponsorsLogin />} />
         
 
 
