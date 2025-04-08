@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home1";
 import Organization from "./Pages/Organization";
 import Sponsors from "./Pages/Sponsors";
-import SponsorSignuo from "./Pages/SponsorSignup";
+import SponsorSignup from "./Pages/SponsorSignup";
 import Login from "./Pages/Login";
 import WelcomeBack from "./Pages/WelcomeBack";
 import ForgetPassword from "./Components/ForgetPassword";
@@ -51,7 +51,6 @@ const config = getDefaultConfig({
 });
 
 const queryClient = new QueryClient();
-import SponsorSignup from "./Pages/SponsorSignup";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -82,7 +81,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Wallet" element={<Wallet />} />
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
-        <Route path="/SponosorSignup" element={<SponsorSignup />} />
+        
 
 
         

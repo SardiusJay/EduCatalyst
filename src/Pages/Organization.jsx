@@ -1,21 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import axios from "axios"; 
 import illustration from "../assets/Educatalystimage.jpg";
-import Home from "./Home1";
+import { useAccount, useWriteContract, useSimulateContract } from "wagmi";
+import contractABI from "../utils/abi.json";
 
 const Organization = () => {
   const navigate = useNavigate();
-  const [logo, setLogo] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     websiteLink: '',
-    description: ''
+    description: '',
+    socialMedia: ''
   });
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formComplete, setFormComplete] = useState(false);
+  
+  const contractAddress = "0xB4f57B3993a1B5124Fe912314B41e54BCBd91Cf2"; 
+  
+  const { address, isConnected } = useAccount();
+  
+  useEffect(() => {
+    const isComplete = 
+      formData.name.trim() !== '' && 
+      formData.email.trim() !== '' && 
+      formData.description.trim() !== '';
+    
+    setFormComplete(isComplete);
+  }, [formData]);
+
+  const validAbi = React.useMemo(() => {
+    if (!contractABI) {
+      console.error('Contract ABI is undefined');
+      return [];
+    }
+
+    if (Array.isArray(contractABI)) {
+      return contractABI;
+    }
+    
+    if (contractABI.abi && Array.isArray(contractABI.abi)) {
+      return contractABI.abi;
+    }
+
+    console.error('Could not find valid ABI format. Please check your abi.json file.');
+    return [];
+  }, []);
+
+  useEffect(() => {
+    console.log("Contract ABI structure:", contractABI);
+    console.log("Valid ABI determined:", validAbi);
+  }, [validAbi]);
+
+  const { data: simulateData, error: simulateError } = useSimulateContract({
+    address: contractAddress,
+    abi: validAbi,
+    functionName: 'registerOrganization',
+    args: [
+      formData.name || '',
+      formData.description || '',
+      formData.websiteLink || '',
+      formData.socialMedia || ''
+    ],
+    query: {
+      enabled: isConnected && formComplete && validAbi.length > 0
+    }
+  });
+  
+  const { writeContract, isPending, isSuccess, error: writeError } = useWriteContract({
+    mutation: {
+      onSuccess(data) {
+        console.log('Organization registered on blockchain:', data);
+        navigate('/Overview');
+      },
+      onError(err) {
+        console.error('Transaction error:', err);
+        setError(err.message || 'Failed to register organization on blockchain. Please try again.');
+        setIsSubmitting(false);
+      }
+    }
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,49 +91,55 @@ const Organization = () => {
     }));
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files?.[0] || null;
-    setLogo(file);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
-    const formDataToSubmit = new FormData();
-    
-    Object.keys(formData).forEach(key => {
-      formDataToSubmit.append(key, formData[key]);
-    });
-
-    if (logo) {
-      formDataToSubmit.append('logo', logo);
-    }
-
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/organizations/', formDataToSubmit, {
-        headers: {
-          'Content-Type': 'multipart/form-data',  
-        }
-      });
-
-     
-      console.log('Organization profile created:', response.data);
-      
-      
-      navigate('/Overview'); 
-    } catch (err) {
-
-      setError(
-        err.response?.data?.message || 
-        'Failed to submit organization profile. Please try again.'
+      if (!isConnected) {
+        throw new Error("Please connect your wallet first");
+      }
+      if (!validAbi || validAbi.length === 0) {
+        throw new Error("Invalid ABI configuration. Please check your contract setup.");
+      }
+      const registerOrgFunc = validAbi.find(item => 
+        item.type === 'function' && 
+        item.name === 'registerOrganization'
       );
+
+      if (!registerOrgFunc) {
+        throw new Error("Contract doesn't have 'registerOrganization' function. Please check your ABI.");
+      }
+
+      const contractArgs = [
+        formData.name || '',           
+        formData.description || '',    
+        formData.websiteLink || '',    
+        formData.socialMedia || ''    
+      ];
+
+      console.log("Submitting contract call with args:", contractArgs);
+
+      if (simulateData?.request) {
+        writeContract(simulateData.request);
+      } else {
+        writeContract({
+          address: contractAddress,
+          abi: validAbi,
+          functionName: 'registerOrganization',
+          args: contractArgs
+        });
+      }
+      
+    } catch (err) {
       console.error('Submission error:', err);
-    } finally {
+      setError(err.message || 'Failed to register organization on blockchain. Please try again.');
       setIsSubmitting(false);
     }
   };
+
+  const isButtonDisabled = isSubmitting || !isConnected || isPending || (!formComplete) || validAbi.length === 0;
 
   return (
     <div className="flex h-screen">
@@ -90,10 +162,35 @@ const Organization = () => {
         <h2 className="text-2xl font-semibold mb-2">Set Up Your Organization Profile</h2>
         <p className="text-gray-500 mb-6">Kindly fill in the following details</p>
 
+        {/* Wallet Connection Status */}
+        {isConnected ? (
+          <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-sm text-green-700">
+              <span className="font-medium">Wallet Connected:</span> {address?.substring(0, 6)}...{address?.substring(address?.length - 4)}
+            </p>
+          </div>
+        ) : (
+          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p className="text-sm text-yellow-700">
+              <span className="font-medium">Wallet Status:</span> Please connect your wallet from the start page
+            </p>
+          </div>
+        )}
+
+        {/* Debug Info (remove in production) */}
+        <div className="mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+          <p className="text-xs text-gray-700">
+            <span className="font-medium">Debug:</span> Form Complete: {formComplete.toString()}, 
+            Valid ABI: {(validAbi.length > 0).toString()}, 
+            Has simulateData: {(simulateData?.request !== undefined).toString()}, 
+            isConnected: {isConnected.toString()}
+          </p>
+        </div>
+
         {/* Error Message */}
-        {error && (
+        {(error || simulateError || writeError) && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            {error}
+            {error || simulateError?.message || writeError?.message || 'An error occurred. Please try again.'}
           </div>
         )}
 
@@ -138,22 +235,15 @@ const Organization = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Organization Logo</label>
-            <div className="flex items-center gap-4">
-              <div className="border border-gray-300 w-full p-3 rounded-lg text-gray-500 bg-gray-100">
-                {logo ? logo.name : "Upload your Logo"}
-              </div>
-              <label className="px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg cursor-pointer">
-                Upload
-                <input 
-                  type="file" 
-                  className="hidden" 
-                  onChange={handleFileChange}
-                  accept=".png,.jpg,.jpeg"
-                />
-              </label>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">PNG format - Max. 5MB</p>
+            <label className="block text-gray-700 font-medium">Social Media</label>
+            <input
+              type="text"
+              name="socialMedia"
+              value={formData.socialMedia}
+              onChange={handleInputChange}
+              placeholder="Twitter: @edutechglobal"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
           </div>
 
           <div>
@@ -172,17 +262,17 @@ const Organization = () => {
           {/* Proceed Button */}
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isButtonDisabled}
             className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition disabled:opacity-50"
           >
-            {isSubmitting ? 'Submitting...' : 'Proceed'}
+            {isSubmitting || isPending ? 'Registering...' : 'Register Organization'}
           </button>
 
           {/* Login Link */}
           <p className="text-center text-gray-500 mt-2">
             Already have an Account? 
             <span 
-              className="text-purple-600 cursor-pointer" 
+              className="text-purple-600 cursor-pointer ml-1" 
               onClick={() => navigate("/login")}
             >
               Login here
