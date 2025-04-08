@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Educatalystimage from '../assets/Educatalystimage.jpg';
 
 
 const Onboarding = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState("");
 
   return (
@@ -29,7 +31,7 @@ const Onboarding = () => {
                 ? "border-purple-600 bg-purple-100"
                 : "border-gray-300"
             }`}
-            onClick={() => setSelected("Organization")}
+            onClick={() => navigate("/Organization")}
           >
             Organization
           </button>

@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home1";
 import Organization from "./Pages/Organization";
 import Sponsors from "./Pages/Sponsors";
+import SponsorSignuo from "./Pages/SponsorSignup";
 import Login from "./Pages/Login";
 import WelcomeBack from "./Pages/WelcomeBack";
 import ForgetPassword from "./Components/ForgetPassword";
@@ -65,7 +66,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/" element={<HomePage />} />
         
         <Route path="/organization" element={<Organization />} />
-        <Route path="/sponsors" element={<Sponsors />} />
+        <Route path="/sponsors" element={<SponsorSignup />} />
+        <Route path="/sponsorSignup" element={<Sponsors />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/WelcomeBack" element={<WelcomeBack />} />
