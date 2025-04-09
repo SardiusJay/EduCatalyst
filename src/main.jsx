@@ -16,6 +16,7 @@ import SponsorsLogin from "./Pages/SponsorsLogin"
 import Wallet from "./Components/Wallet";
 import Settings from "./Components/Settings";
 import Settings2 from "./Components/Settings2";
+import RequestPayment from "./Pages/RequestPayment";
 import "./index.css";
 import "./Components/Onboarding";
 import Onboarding from "./Components/Onboarding";
@@ -83,6 +84,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Setting" element={<Settings />} />
         <Route path="/Setting2" element={<Settings2 />} />
         <Route path="/SponsorsLogin" element={<SponsorsLogin />} />
+        <Route path="/RequestPayment" element={<RequestPayment />} />
         
 
 
